@@ -9,51 +9,47 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onView:simpleConfigVaultView"
-  ],
   "main": "./dist/extension.js",
   "contributes": {
     "views": {
       "explorer": [
         {
-          "id": "simpleConfigVault",
+          "id": "simpleConfigVaultView",
           "name": "[configs]",
-          "contextualTitle": "SimpleConfigVault"
+          "contextualTitle": "SimpleConfigVault",
+          "when": "config.simpleConfigVault.visible"
         }
       ]
     },
-    "configuration": [
-      {
-        "title": "SimpleConfigVault",
-        "properties": {
-          "simpleConfigVault.filePatterns": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "default": [
-              "tsconfig*.json",
-              ".gitignore",
-              ".eslintrc*",
-              "vite.config.*",
-              "webpack.config.*"
-            ],
-            "description": "Glob patterns for files to include in virtual folder (supports wildcards like tsconfig*.json)"
+    "configuration": {
+      "title": "SimpleConfigVault",
+      "properties": {
+        "simpleConfigVault.filePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "simpleConfigVault.visible": {
-            "type": "boolean",
-            "default": "true",
-            "description": "Show the virtual folder by default"
-          },
-          "simpleConfigVault.folderColor": {
-            "type": "string",
-            "default": "#888888",
-            "description": "Hex color for folder icon or description"
-          }
+          "default": [
+            "tsconfig*.json",
+            ".gitignore",
+            ".eslintrc*",
+            "vite.config.*",
+            "webpack.config.*"
+          ],
+          "description": "Glob patterns for files to include in virtual folder (supports wildcards like tsconfig*.json)"
+        },
+        "simpleConfigVault.visible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the virtual folder by default"
+        },
+        "simpleConfigVault.folderColor": {
+          "type": "string",
+          "default": "#888888",
+          "description": "Hex color for folder icon or description"
         }
       }
-    ],
+    },
     "commands": [
       {
         "command": "simpleConfigVault.refresh",

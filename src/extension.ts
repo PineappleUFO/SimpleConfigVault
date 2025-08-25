@@ -1,26 +1,57 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { ConfigsProvider } from './ConfigsProvider';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const provider = new ConfigsProvider();
+  vscode.window.createTreeView('simpleConfigVaultView', { treeDataProvider: provider });
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "simple-config-vault" is now active!');
+  // Commands
+  context.subscriptions.push(vscode.commands.registerCommand('simpleConfigVault.refresh', async () => {
+    const rootUri = vscode.workspace.workspaceFolders?.[0]?.uri;
+    if (rootUri) {
+      await provider.updateFileExclusions();
+      await vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
+    }
+    provider.refresh();
+  }));
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('simple-config-vault.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from simple-config-vault!');
-	});
+  context.subscriptions.push(vscode.commands.registerCommand('simpleConfigVault.toggleVisibility', async () => {
+    const config = vscode.workspace.getConfiguration('simpleConfigVault');
+    const current = config.get<boolean>('visible', true);
+    await config.update('visible', !current, vscode.ConfigurationTarget.Workspace);
+  }));
 
-	context.subscriptions.push(disposable);
+  // Listeners
+  context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+    if (e.affectsConfiguration('simpleConfigVault')) {
+      vscode.commands.executeCommand('simpleConfigVault.refresh');
+    }
+  }));
+
+  context.subscriptions.push(vscode.workspace.onDidChangeWorkspaceFolders(() => {
+    vscode.commands.executeCommand('simpleConfigVault.refresh');
+  }));
+
+  // Initial setup
+  const config = vscode.workspace.getConfiguration('simpleConfigVault');
+  const isVisible = config.get<boolean>('visible', true);
+  if (isVisible) {
+    vscode.commands.executeCommand('simpleConfigVault.refresh');
+  }
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate(): Thenable<void> | undefined {
+  if (!vscode.workspace.workspaceFolders) {
+    return;
+  }
+  // Clean up only our excludes
+  const config = vscode.workspace.getConfiguration('simpleConfigVault');
+  const patterns = config.get<string[]>('filePatterns', []);
+  const filesConfig = vscode.workspace.getConfiguration('files');
+  const exclude: { [key: string]: boolean } = filesConfig.get('exclude', {});
+  patterns.forEach(pattern => {
+    const excludePattern = pattern.startsWith('**/') ? pattern : `**/${pattern}`;
+    delete exclude[excludePattern];
+  });
+  return filesConfig.update('exclude', exclude, vscode.ConfigurationTarget.Workspace);
+}
