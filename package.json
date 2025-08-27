@@ -44,11 +44,6 @@
           "type": "boolean",
           "default": true,
           "description": "Show the virtual folder by default"
-        },
-        "simpleConfigVault.folderColor": {
-          "type": "string",
-          "default": "#888888",
-          "description": "Hex color for folder icon or description"
         }
       }
     },
