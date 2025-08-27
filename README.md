@@ -9,13 +9,13 @@
 -   **Virtual Config Folder**: Displays a `[configs]` folder at the top of your explorer, containing all your important configuration files.
 -   **Automatic File Hiding**: Files shown in the virtual folder are automatically hidden from the file explorer, keeping your workspace clean.
 -   **Customizable File Patterns**: You can define which files to include in the virtual folder using glob patterns.
--   **Toggle Visibility**: Easily show or hide the virtual folder and its files with a single command.
 
 ## Usage
 
-1.  Install the extension from the Visual Studio Code Marketplace.
-2.  Once installed, you will see a `[configs]` folder in your explorer, populated with default configuration files (e.g., `tsconfig.json`, `.gitignore`).
-3.  To customize which files appear, modify the `simpleConfigVault.filePatterns` setting in your `.vscode/settings.json` file.
+1. Install vsce ` npm install -g @vscode/vsce`
+2. Build vsix `vsce package`
+3. Install vsix in VsCode
+
 
 ## Commands
 
