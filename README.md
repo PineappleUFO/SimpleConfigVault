@@ -2,6 +2,8 @@
 
 **Simple Config Vault** is a Visual Studio Code extension that provides a virtual `[configs]` folder in your explorer, giving you quick access to all your project's configuration files in one place. It helps you declutter your workspace by hiding these files from the main explorer view while keeping them easily accessible.
 
+![readme image](https://github.com/PineappleUFO/SimpleConfigVault/blob/master/src/readme_img.png?raw=true)
+
 ## Features
 
 -   **Virtual Config Folder**: Displays a `[configs]` folder at the top of your explorer, containing all your important configuration files.
@@ -35,6 +37,12 @@ There are no known issues at this time.
 
 ## Release Notes
 
+### 0.1.1
+
+-   Added screenshot to README.
+-   Added extension tests.
+-   Minor fixes and improvements.
+
 ### 0.1.0
 
 -   Initial release of Simple Config Vault.
@@ -43,4 +51,3 @@ There are no known issues at this time.
 ---
 
 **Enjoy a cleaner workspace!**
-

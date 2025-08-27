@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2025-08-27
+
+### Added
+
+-   Add screenshot to `README.md`.
+-   Add extension tests.
+
+### Changed
+
+-   Remove color from config items.
+
+### Fixed
+
+-   Add author and repository in `package.json`.
+-   Remove unused icons.
+
 ## [0.1.0] - 2025-08-25
 
 ### Added
@@ -19,4 +35,3 @@ All notable changes to this project will be documented in this file.
 -   **Project Structure**: Refactored the entire extension from the initial template to a more robust and maintainable structure.
 -   **Activation Events**: The extension now activates when its view is visible, ensuring it only runs when needed.
 -   **Configuration**: All settings are now properly defined under the `simpleConfigVault` configuration section.
-
