@@ -2,11 +2,15 @@
   "name": "simple-config-vault",
   "displayName": "SimpleConfigVault",
   "author": "PineappleUFO",
-  "repository": "https://github.com/PineappleUFO/SimpleConfigVault",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PineappleUFO/SimpleConfigVault"
+  },
+  "license": "MIT",
   "description": "Groups configuration files into a virtual folder in VS Code Explorer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": "^1.103.0"
   },
   "categories": [
     "Other"
