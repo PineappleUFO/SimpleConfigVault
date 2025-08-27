@@ -4,6 +4,7 @@
 
 ![readme image](https://github.com/PineappleUFO/SimpleConfigVault/blob/master/src/readme_img.png?raw=true)
 
+![readme image 2](https://github.com/PineappleUFO/SimpleConfigVault/blob/master/src/readme_img2.png?raw=true)
 ## Features
 
 -   **Virtual Config Folder**: Displays a `[configs]` folder at the top of your explorer, containing all your important configuration files.
